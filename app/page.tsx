@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import Navigation from "@/components/sections/Navigation"
 import HeroSection from "@/components/sections/HeroSection"
+import AboutSection from "@/components/sections/AboutSection"
 import StockSection from "@/components/sections/StockSection"
 import ProductsSection from "@/components/sections/ProductsSection"
 import Footer from "@/components/sections/Footer"
@@ -12,7 +13,7 @@ export default function Home() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['hero', 'stock', 'products', 'footer']
+      const sections = ['hero', 'about', 'stock', 'products', 'footer']
       const scrollPosition = window.scrollY + 100
 
       for (const section of sections) {
@@ -42,6 +43,7 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       <Navigation activeSection={activeSection} scrollToSection={scrollToSection} />
       <HeroSection scrollToSection={scrollToSection} />
+      <AboutSection />
       <StockSection />
       <ProductsSection />
       <Footer />

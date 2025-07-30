@@ -24,6 +24,12 @@ export default function Navigation({ activeSection, scrollToSection }: Navigatio
             Inicio
           </button>
           <button 
+            onClick={() => scrollToSection('about')}
+            className={`text-sm font-medium transition-colors ${activeSection === 'about' ? 'text-purple-600' : 'text-gray-600 hover:text-purple-600'}`}
+          >
+            Quiénes Somos
+          </button>
+          <button 
             onClick={() => scrollToSection('stock')}
             className={`text-sm font-medium transition-colors ${activeSection === 'stock' ? 'text-purple-600' : 'text-gray-600 hover:text-purple-600'}`}
           >

@@ -52,16 +52,21 @@ export default function Footer() {
 
             <div className="mt-6">
               <h5 className="text-white font-medium mb-3">Síguenos</h5>
-              <button className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors">
+              <a 
+                href="https://www.instagram.com/vinilosachaga/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
+              >
                 <Instagram className="w-5 h-5" />
                 <span className="underline">Instagram</span>
-              </button>
+              </a>
             </div>
           </div>
         </div>
 
         <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-          <p>&copy; 2024 Vinilos Achaga. Todos los derechos reservados.</p>
+          <p>&copy; 2025 Vinilos Achaga. Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>
