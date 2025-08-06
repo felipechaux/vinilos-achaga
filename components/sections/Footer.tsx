@@ -2,7 +2,11 @@
 
 import { Instagram, Phone, Mail, MapPin } from "lucide-react"
 
-export default function Footer() {
+interface FooterProps {
+  scrollToSection: (sectionId: string) => void
+}
+
+export default function Footer({ scrollToSection }: FooterProps) {
   return (
     <footer id="footer" className="bg-gray-900 text-white py-16">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
@@ -22,10 +26,38 @@ export default function Footer() {
           <div className="md:col-span-1">
             <h4 className="text-lg font-semibold mb-4 text-white">Nosotros</h4>
             <ul className="space-y-2 text-gray-400">
-              <li><button className="hover:text-white transition-colors">Quienes somos</button></li>
-              <li><button className="hover:text-white transition-colors">Productos</button></li>
-              <li><button className="hover:text-white transition-colors">Ofertas</button></li>
-              <li><button className="hover:text-white transition-colors">Contáctanos</button></li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('about')}
+                  className="hover:text-white transition-colors"
+                >
+                  Quienes somos
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('products')}
+                  className="hover:text-white transition-colors"
+                >
+                  Productos
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('stock')}
+                  className="hover:text-white transition-colors"
+                >
+                  Ofertas
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('footer')}
+                  className="hover:text-white transition-colors"
+                >
+                  Contáctanos
+                </button>
+              </li>
             </ul>
           </div>
 

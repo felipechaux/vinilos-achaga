@@ -18,6 +18,9 @@ const ProductsSection = dynamic(() => import("@/components/sections/ProductsSect
 const Footer = dynamic(() => import("@/components/sections/Footer"), {
   loading: () => <div className="h-32 bg-gray-200 animate-pulse" />
 })
+const WhatsAppButton = dynamic(() => import("@/components/WhatsAppButton"), {
+  ssr: false
+})
 
 const sections = ['hero', 'about', 'stock', 'products', 'footer'] as const
 
@@ -76,14 +79,22 @@ export default function Home() {
     scrollToSection
   }), [scrollToSection])
 
+  const footerProps = useMemo(() => ({
+    scrollToSection
+  }), [scrollToSection])
+
   return (
     <div className="min-h-screen bg-white">
       <Navigation {...navigationProps} />
+      <div className="relative">
+        <WhatsAppButton />
+      </div>
       <HeroSection {...heroProps} />
       <AboutSection />
       <StockSection />
       <ProductsSection />
-      <Footer />
+      <Footer {...footerProps} />
+      <WhatsAppButton />
     </div>
   )
 }
