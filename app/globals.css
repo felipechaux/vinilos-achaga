@@ -2,6 +2,176 @@
 @tailwind components;
 @tailwind utilities;
 
+/* CSS Custom Properties for consistent theming */
+:root {
+  --primary-purple: #8b5cf6;
+  --primary-blue: #3b82f6;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --background: #ffffff;
+  --surface: #f9fafb;
+}
+
+/* Accessibility improvements */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  *:focus {
+    outline: 2px solid var(--primary-purple);
+    outline-offset: 2px;
+  }
+
+  /* High contrast focus indicators */
+  *:focus-visible {
+    outline: 2px solid var(--primary-purple);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.2);
+  }
+
+  /* Remove focus outline for mouse users */
+  *:focus:not(:focus-visible) {
+    outline: none;
+    box-shadow: none;
+  }
+
+  /* Screen reader only content */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .sr-only:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0.5rem 1rem;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+
+  /* Ensure sufficient color contrast */
+  body {
+    color: var(--text-primary);
+    background-color: var(--background);
+  }
+
+  /* High contrast button focus states */
+  button:focus-visible,
+  a:focus-visible {
+    outline: 2px solid var(--primary-purple);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.2);
+  }
+
+  /* Reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    :root {
+      --primary-purple: #5b21b6;
+      --primary-blue: #1e40af;
+      --text-primary: #000000;
+      --text-secondary: #374151;
+    }
+  }
+}
+
+/* Custom utility classes */
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, var(--primary-purple), var(--primary-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-float-delayed {
+    animation: float 6s ease-in-out infinite 2s;
+  }
+
+  /* Ensure buttons have sufficient target size (44px minimum) */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Ensure form elements have proper contrast */
+input, textarea, select {
+  border: 1px solid #d1d5db;
+  background-color: white;
+  color: var(--text-primary);
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--primary-purple);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+}
+
+/* Improve link accessibility */
+a {
+  color: var(--primary-purple);
+  text-decoration-color: transparent;
+  transition: text-decoration-color 0.2s;
+}
+
+a:hover, a:focus {
+  text-decoration-color: currentColor;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

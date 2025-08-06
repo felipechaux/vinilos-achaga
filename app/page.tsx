@@ -86,13 +86,12 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       <Navigation {...navigationProps} />
-      <div className="relative">
-        <WhatsAppButton />
-      </div>
-      <HeroSection {...heroProps} />
-      <AboutSection />
-      <StockSection />
-      <ProductsSection />
+      <main id="main-content">
+        <HeroSection {...heroProps} />
+        <AboutSection />
+        <StockSection />
+        <ProductsSection />
+      </main>
       <Footer {...footerProps} />
       <WhatsAppButton />
     </div>

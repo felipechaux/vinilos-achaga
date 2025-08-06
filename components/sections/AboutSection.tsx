@@ -2,23 +2,25 @@
 
 export default function AboutSection() {
   return (
-    <section id="about" className="min-h-screen py-20 relative">
+    <section id="about" className="min-h-screen py-20 relative" aria-labelledby="about-title">
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-fixed"
         style={{
           backgroundImage: "url('https://static.wixstatic.com/media/235a0e_3d102b9fcb2f49a1aee561e9128825b6~mv2.jpeg/v1/fill/w_1200,h_814,al_c,q_85,enc_avif,quality_auto/nosotros.jpeg')"
         }}
+        role="img"
+        aria-label="Imagen de fondo mostrando el equipo de trabajo de Vinilos Achaga"
       >
         {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="absolute inset-0 bg-black/60" aria-hidden="true"></div>
       </div>
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
         <div className="flex items-center justify-center min-h-screen">
           <div className="max-w-4xl text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
+            <h2 id="about-title" className="text-4xl md:text-5xl font-bold text-white mb-8">
               Quiénes Somos
             </h2>
             
@@ -28,8 +30,11 @@ export default function AboutSection() {
                 <div className="bg-white rounded-lg p-4 shadow-md">
                   <img 
                     src="https://static.wixstatic.com/media/235a0e_f7638eb88c6f478cbb26eb1d0e90188e~mv2.png/v1/fill/w_1140,h_298,fp_0.50_0.68,lg_1,q_85,enc_avif,quality_auto/Logotipo-ARclad-nov24-2016.png"
-                    alt="Arclad Logo - Marca oficial"
+                    alt="Logotipo de Arclad - Marca oficial de vinilos adhesivos de alta calidad"
                     className="h-16 md:h-20 w-auto object-contain"
+                    loading="lazy"
+                    width="160"
+                    height="80"
                   />
                 </div>
               </div>
@@ -57,7 +62,7 @@ export default function AboutSection() {
               </div>
               
               <div className="mt-8 flex justify-center">
-                <div className="bg-purple-600 text-white px-6 py-3 rounded-full">
+                <div className="bg-purple-600 text-white px-6 py-3 rounded-full" role="complementary" aria-label="Años de experiencia">
                   <span className="font-semibold text-lg">+20 años de experiencia</span>
                 </div>
               </div>
