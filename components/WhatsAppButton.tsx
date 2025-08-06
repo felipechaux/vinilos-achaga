@@ -19,7 +19,7 @@ interface WhatsAppButtonProps {
 
 export default function WhatsAppButton({ 
   className = "", 
-  message = "Hola! Me interesa conocer más sobre sus vinilos." 
+  message = "Hola! Me interesa conocer más sobre sus vinilos adhesivos." 
 }: WhatsAppButtonProps) {
   const phoneNumber = "+573128546025"
   
