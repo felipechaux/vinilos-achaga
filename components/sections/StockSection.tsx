@@ -9,37 +9,41 @@ const products = [
   { 
     id: 1, 
     name: "Vinilo Adhesivo Transparente Brillante", 
-    price: "$25.000", 
+    price: "$300.000", 
     stock: 15, 
     category: "Transparente", 
     rating: 4.8,
+    size: "152cm X 50 mtrs",
     image: "https://static.wixstatic.com/media/235a0e_a1f943b9f3d24f048c73aa48855a29d2~mv2.jpg/v1/fill/w_872,h_1160,q_90,enc_avif,quality_auto/235a0e_a1f943b9f3d24f048c73aa48855a29d2~mv2.jpg"
   },
   { 
     id: 2, 
     name: "Vinilo Adhesivo Transparente Mate", 
-    price: "$22.000", 
+    price: "$300.000", 
     stock: 12, 
     category: "Transparente", 
     rating: 4.7,
+    size: "152cm X 50 mtrs",
     image: "https://static.wixstatic.com/media/235a0e_376a87185539418bb4752d1d337316c8~mv2.webp/v1/fill/w_520,h_691,q_90,enc_avif,quality_auto/235a0e_376a87185539418bb4752d1d337316c8~mv2.webp"
   },
   { 
     id: 3, 
     name: "Vinilo Adhesivo Blanco Brillante", 
-    price: "$20.000", 
+    price: "$300.000", 
     stock: 18, 
     category: "Blanco", 
     rating: 4.9,
+    size: "152cm X 50 mtrs",
     image: "https://static.wixstatic.com/media/235a0e_ee382f10cecd49cd848b940519aff0f5~mv2.jpg/v1/fill/w_466,h_534,q_90,enc_avif,quality_auto/235a0e_ee382f10cecd49cd848b940519aff0f5~mv2.jpg"
   },
   { 
     id: 4, 
     name: "Vinilo Adhesivo Blanco Mate", 
-    price: "$18.000", 
+    price: "$300.000", 
     stock: 20, 
     category: "Blanco", 
     rating: 4.8,
+    size: "152cm X 50 mtrs",
     image: "https://static.wixstatic.com/media/235a0e_2ddfbc43a25c4e36876e63d38988481b~mv2.webp/v1/fit/w_536,h_670,q_90,enc_avif,quality_auto/235a0e_2ddfbc43a25c4e36876e63d38988481b~mv2.webp"
   },
 ]
@@ -83,6 +87,7 @@ export default function StockSection() {
                   <div>
                     <p className="text-2xl font-bold text-purple-600">{product.price}</p>
                     <p className="text-sm text-gray-500">Stock: {product.stock} unidades</p>
+                    <p className="text-sm text-gray-600">Tamaño: {product.size}</p>
                   </div>
                   <Button 
                     size="sm" 
