@@ -3,6 +3,9 @@
 import { useState, useEffect } from "react"
 import { ShoppingCart, User, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import dynamic from "next/dynamic"
+import { useCartCount } from "@/hooks/useCartCount"
+const CartView = dynamic(() => import("@/components/CartView"), { ssr: false })
 
 interface NavigationProps {
   activeSection: string
@@ -11,6 +14,8 @@ interface NavigationProps {
 
 export default function Navigation({ activeSection, scrollToSection }: NavigationProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [showCart, setShowCart] = useState(false)
+  const cartCount = useCartCount()
 
   // Close mobile menu when clicking outside or pressing escape
   useEffect(() => {
@@ -100,10 +105,16 @@ export default function Navigation({ activeSection, scrollToSection }: Navigatio
             <Button 
               variant="ghost" 
               size="sm"
-              className="focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2 touch-target"
+              className="relative focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2 touch-target"
               aria-label="Ver carrito de compras"
+              onClick={() => setShowCart(true)}
             >
               <ShoppingCart className="w-4 h-4" aria-hidden="true" />
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full px-1.5 py-0.5 min-w-[18px] text-center border border-white shadow">
+                  {cartCount}
+                </span>
+              )}
               <span className="sr-only">Carrito</span>
             </Button>
             <Button 
@@ -120,6 +131,22 @@ export default function Navigation({ activeSection, scrollToSection }: Navigatio
           </div>
         </div>
       </nav>
+
+      {/* Cart Modal Overlay */}
+      {showCart && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm" role="dialog" aria-modal="true">
+          <div className="relative bg-white rounded-lg shadow-lg max-w-lg w-full mx-4">
+            <button
+              className="absolute top-2 right-2 p-2 rounded-full bg-gray-100 hover:bg-gray-200"
+              aria-label="Cerrar carrito"
+              onClick={() => setShowCart(false)}
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <CartView />
+          </div>
+        </div>
+      )}
 
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
@@ -180,6 +207,7 @@ export default function Navigation({ activeSection, scrollToSection }: Navigatio
                 <Button 
                   className="w-full bg-purple-600 hover:bg-purple-700 text-white focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2 touch-target"
                   aria-label="Ver carrito de compras"
+                  onClick={() => { setShowCart(true); setIsMobileMenuOpen(false); }}
                 >
                   <ShoppingCart className="w-4 h-4 mr-2" aria-hidden="true" />
                   Ver Carrito

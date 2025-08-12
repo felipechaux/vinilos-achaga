@@ -4,6 +4,8 @@ import { Package, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { addToCart } from "@/lib/cart"
+import { useState } from "react"
 
 const products = [
   { 
@@ -49,6 +51,19 @@ const products = [
 ]
 
 export default function StockSection() {
+  const [addedId, setAddedId] = useState<number | null>(null);
+
+  function handleAddToCart(product: typeof products[number]) {
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+    });
+    setAddedId(product.id);
+    setTimeout(() => setAddedId(null), 1200);
+  }
+
   return (
     <section id="stock" className="min-h-screen py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
@@ -82,7 +97,6 @@ export default function StockSection() {
                     <Badge variant="secondary" className="mb-3">{product.category}</Badge>
                   </div>
                 </div>
-                
                 <div className="space-y-3">
                   <div>
                     <p className="text-2xl font-bold text-purple-600">{product.price}</p>
@@ -91,9 +105,11 @@ export default function StockSection() {
                   </div>
                   <Button 
                     size="sm" 
-                    className="w-full bg-purple-600 hover:bg-purple-700 transition-colors"
+                    className={`w-full bg-purple-600 hover:bg-purple-700 transition-colors ${addedId === product.id ? 'opacity-70 pointer-events-none' : ''}`}
+                    onClick={() => handleAddToCart(product)}
+                    disabled={addedId === product.id}
                   >
-                    Agregar al Carrito
+                    {addedId === product.id ? 'Añadido!' : 'Agregar al Carrito'}
                   </Button>
                 </div>
               </CardContent>

@@ -1,72 +1,15 @@
-import type React from "react"
-import type { Metadata, Viewport } from "next"
-import { Inter } from "next/font/google"
-import "./globals.css"
+import { Inter } from "next/font/google";
+import { CartModalProvider } from "@/components/CartModalContext";
+import "./globals.css";
 
 const inter = Inter({ 
   subsets: ["latin"],
   display: 'swap',
   preload: true,
   variable: '--font-inter',
-})
+});
 
-export const metadata: Metadata = {
-  title: "Vinilos Achaga - Vinilos Adhesivos de Alta Calidad",
-  description: "Especialistas en vinilos adhesivos para impresión digital, plotter de corte y sandblasting en Bogotá, Colombia. +20 años de experiencia con productos Arclad.",
-  keywords: "vinilos adhesivos, impresión digital, plotter de corte, sandblasting, Arclad, Bogotá, Colombia, vinilos calidad",
-  generator: 'Next.js',
-  robots: 'index, follow',
-  authors: [{ name: 'Vinilos Achaga', url: 'https://vinilosachaga.com' }],
-  metadataBase: new URL('https://vinilosachaga.com'),
-  alternates: {
-    canonical: '/',
-  },
-  category: 'Business',
-  classification: 'Vinilos Adhesivos',
-  referrer: 'origin-when-cross-origin',
-  icons: {
-    icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
-      { url: '/icon.svg', sizes: '32x32', type: 'image/svg+xml' }
-    ],
-    apple: '/icon.svg',
-  },
-  manifest: '/manifest.json',
-  openGraph: {
-    title: "Vinilos Achaga - Vinilos Adhesivos de Alta Calidad",
-    description: "Especialistas en vinilos adhesivos para impresión digital, plotter de corte y sandblasting en Bogotá, Colombia. +20 años de experiencia.",
-    type: "website",
-    locale: "es_CO",
-    siteName: "Vinilos Achaga",
-    url: '/',
-    images: [
-      {
-        url: '/icon.svg',
-        width: 1200,
-        height: 630,
-        alt: 'Vinilos Achaga - Especialistas en Vinilos Adhesivos',
-      }
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: "Vinilos Achaga - Vinilos Adhesivos de Alta Calidad",
-    description: "Especialistas en vinilos adhesivos para impresión digital, plotter de corte y sandblasting en Bogotá, Colombia.",
-    images: ['/icon.svg'],
-    creator: '@vinilosachaga',
-  },
-}
-
-export const viewport: Viewport = {
-  width: 'device-width',
-  initialScale: 1,
-}
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" className={inter.variable}>
       <head>
@@ -76,13 +19,11 @@ export default function RootLayout({
         <meta name="theme-color" content="#8b5cf6" />
         <meta name="color-scheme" content="light" />
         <meta name="format-detection" content="telephone=yes" />
-        
         {/* Favicons and Icons */}
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" sizes="32x32" />
         <link rel="apple-touch-icon" href="/icon.svg" />
         <link rel="manifest" href="/manifest.json" />
-        
         {/* Schema.org structured data */}
         <script
           type="application/ld+json"
@@ -124,10 +65,12 @@ export default function RootLayout({
         >
           Saltar al contenido principal
         </a>
-        <div id="main-content">
-          {children}
-        </div>
+        <CartModalProvider>
+          <div id="main-content">
+            {children}
+          </div>
+        </CartModalProvider>
       </body>
     </html>
-  )
+  );
 }
