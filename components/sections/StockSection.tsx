@@ -7,11 +7,16 @@ import { Badge } from "@/components/ui/badge"
 import { addToCart } from "@/lib/cart"
 import { useState } from "react"
 
+// Format number as Colombian Peso
+const formatCOP = (value: number) => {
+  return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(value);
+}
+
 const products = [
   { 
     id: 1, 
     name: "Vinilo Adhesivo Transparente Brillante", 
-    price: "$300.000", 
+    price: 300000, 
     stock: 15, 
     category: "Transparente", 
     rating: 4.8,
@@ -21,7 +26,7 @@ const products = [
   { 
     id: 2, 
     name: "Vinilo Adhesivo Transparente Mate", 
-    price: "$300.000", 
+    price: 300000, 
     stock: 12, 
     category: "Transparente", 
     rating: 4.7,
@@ -31,7 +36,7 @@ const products = [
   { 
     id: 3, 
     name: "Vinilo Adhesivo Blanco Brillante", 
-    price: "$300.000", 
+    price: 300000, 
     stock: 18, 
     category: "Blanco", 
     rating: 4.9,
@@ -41,7 +46,7 @@ const products = [
   { 
     id: 4, 
     name: "Vinilo Adhesivo Blanco Mate", 
-    price: "$300.000", 
+    price: 300000, 
     stock: 20, 
     category: "Blanco", 
     rating: 4.8,
@@ -57,7 +62,7 @@ export default function StockSection() {
     addToCart({
       id: product.id,
       name: product.name,
-      price: product.price,
+      price: product.price.toString(),
       image: product.image,
     });
     setAddedId(product.id);
@@ -99,7 +104,7 @@ export default function StockSection() {
                 </div>
                 <div className="space-y-3">
                   <div>
-                    <p className="text-2xl font-bold text-purple-600">{product.price}</p>
+                    <p className="text-2xl font-bold text-purple-600">{formatCOP(product.price)}</p>
                     <p className="text-sm text-gray-500">Stock: {product.stock} unidades</p>
                     <p className="text-sm text-gray-600">Tamaño: {product.size}</p>
                   </div>

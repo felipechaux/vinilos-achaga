@@ -25,6 +25,7 @@ export default function CartView() {
     setCart([]);
   }
 
+  console.log('Cart contents:', cart);
   if (cart.length === 0) {
     return (
       <div className="p-8 text-center">
@@ -33,6 +34,13 @@ export default function CartView() {
       </div>
     );
   }
+
+  // Calculate total (handle price with possible $ and .)
+  const total = cart.reduce((sum, item) => {
+    let priceStr = String(item.price).replace(/[^\d]/g, '');
+    const price = parseInt(priceStr, 10);
+    return sum + (isNaN(price) ? 0 : price * item.quantity);
+  }, 0);
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow">
@@ -63,7 +71,32 @@ export default function CartView() {
       </ul>
       <div className="flex justify-between items-center">
         <Button variant="outline" onClick={handleClear}>Vaciar Carrito</Button>
-        {/* Ready for payment API: Add checkout button here */}
+        <Button
+          variant="default"
+          className="bg-green-600 hover:bg-green-700 text-white"
+          onClick={async () => {
+            try {
+              const response = await fetch('/api/wompi-checkout', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ cart }),
+              });
+              const data = await response.json();
+              if (data.url) {
+                window.location.href = data.url;
+              } else {
+                alert(data.error || 'Error iniciando el pago.');
+              }
+            } catch (err) {
+              alert('Error conectando con el servidor de pagos.');
+            }
+          }}
+        >
+          Pagar con Wompi
+        </Button>
+      </div>
+      <div className="flex justify-end mt-6">
+        <span className="text-lg font-semibold">Total: {total.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</span>
       </div>
     </div>
   );

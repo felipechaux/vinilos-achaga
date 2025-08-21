@@ -1,4 +1,6 @@
 import { Inter } from "next/font/google";
+
+import { Analytics } from "@vercel/analytics/next";
 import { CartModalProvider } from "@/components/CartModalContext";
 import "./globals.css";
 
@@ -70,6 +72,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </div>
         </CartModalProvider>
+        <Analytics />
       </body>
     </html>
   );
