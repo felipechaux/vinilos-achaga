@@ -19,8 +19,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const price = Number(item.price);
     const quantity = parseInt(item.quantity, 10);
     if (isNaN(price) || isNaN(quantity) || quantity < 1) {
-      console.error('Invalid cart item:', { item, price, quantity });
-      return res.status(400).json({ error: `Invalid cart item: ${JSON.stringify({ item, price, quantity })}` });
+      return res.status(400).json({ error: `Invalid cart item` });
     }
     total += price * quantity;
   }
